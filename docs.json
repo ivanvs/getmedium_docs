@@ -32,7 +32,7 @@
       },
       {
         "tab": "API Reference",
-        "openapi": "https://github.com/ivanvs/getmedium_docs/blob/main/api-reference/openapi.yaml"
+        "openapi": "https://github.com/ivanvs/getmedium_docs/blob/main/api-reference/openapi.json"
       }
     ],
     "global": {
