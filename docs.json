@@ -24,11 +24,63 @@
         "groups": [
           {
             "group": "API Documentation",
-            "pages": ["api-reference/introduction"]
+            "pages": ["api-reference/quickstart", "api-reference/index"]
           },
           {
-            "group": "Endpoint Examples",
-            "pages": ["api-reference/articles/search-articles", "api-reference/articles/get-article", "api-reference/articles/voters"]
+            "group": "Articles",
+            "pages": [
+              "api-reference/articles/search-articles",
+              "api-reference/articles/get-article",
+              "api-reference/articles/voters",
+              "api-reference/articles/responses",
+              "api-reference/articles/recommended-lists",
+              "api-reference/articles/related-articles",
+              "api-reference/articles/content-html",
+              "api-reference/articles/content-markdown",
+              "api-reference/articles/url-to-article-id"
+            ]
+          },
+          {
+            "group": "Users",
+            "pages": [
+              "api-reference/users/search-users",
+              "api-reference/users/get-user",
+              "api-reference/users/articles",
+              "api-reference/users/followers",
+              "api-reference/users/following-users",
+              "api-reference/users/publications",
+              "api-reference/users/publications-user-following",
+              "api-reference/users/books",
+              "api-reference/users/lists"
+            ]
+          },
+          {
+            "group": "Tags",
+            "pages": [
+              "api-reference/tags/search-tags",
+              "api-reference/tags/get-tag",
+              "api-reference/tags/archived-articles",
+              "api-reference/tags/root-tags",
+              "api-reference/tags/latest-articles",
+              "api-reference/tags/recommended-articles",
+              "api-reference/tags/recommended-authors",
+              "api-reference/tags/recommended-lists",
+              "api-reference/tags/related-tags",
+              "api-reference/tags/top-articles"
+            ]
+          },
+          {
+            "group": "Publications",
+            "pages": [
+              "api-reference/publications/search-publications",
+              "api-reference/publications/get-publication",
+              "api-reference/publications/newsletter",
+              "api-reference/publications/articles"
+            ]
+          },
+          {
+            "group": "Lists",
+            "pages": ["api-reference/lists/search-lists", "api-reference/lists/get-list", "api-reference/lists/voters", "api-reference/lists/responses"]
           }
         ]
       }
