@@ -73,7 +73,20 @@ paths:
           description: Unique identifier of tag
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ChildrenTag"
+              example:
+                - id: "go"
+                  name: "Go"
+                - id: "programming"
+                  name: "Programming"
+                - id: "software-development"
+                  name: "Software Development"
   /tags/root:
     get:
       tags:
