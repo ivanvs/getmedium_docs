@@ -896,8 +896,8 @@ paths:
           description: ""
   /:
     get:
-      summary: index
-      description: "The index endpoint returns a JSON object containing the following details:\n\n- **api_name**: The name of the API.\n    \n- **description**: A brief overview of the API’s functionality.\n    \n- **medium-api-version**: The current version of the API.\n    \n- **medium-client-version**: The current version of medium client"
+      summary: Get Service Information
+      description: "The endpoint provides essential information about the API"
       operationId: index
       parameters:
         - in: header
@@ -907,7 +907,35 @@ paths:
           required: true
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  api_name:
+                    type: string
+                  description:
+                    type: string
+                  medium-api-version:
+                    type: string
+                  medium-client-version:
+                    type: string
+                  contact:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                      website:
+                        type: string
+              example:
+                api_name: "Get Medium Data"
+                description: "Programmatically fetch data from Medium.com, including authors, articles, publications, user lists, and tags."
+                medium-api-version: "1.0.0"
+                medium-client-version: "1.0.23"
+                contact:
+                  email: "support@getmediumdata.com"
+                  website: "https://www.getmediumdata.com"
   /lists/{list_id}:
     get:
       tags:
