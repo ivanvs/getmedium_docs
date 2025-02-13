@@ -91,7 +91,7 @@ paths:
     get:
       tags:
         - tags
-      summary: Root Tags
+      summary: Get Root Tags
       description: "This endpoint allows you to retrieve a list of **root tags**  \non Medium. Root tags are top-level or parent tags that represent broad categories or themes (e.g., \"Technology,\" \"Life,\" \"World\"). These tags are useful for organizing content, building navigation systems, or analyzing high-level trends."
       operationId: rootTags
       parameters:
@@ -102,7 +102,20 @@ paths:
           required: true
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ChildrenTag"
+              example:
+                - id: "life"
+                  name: "Life"
+                - id: "self-improvement"
+                  name: "Self Improvement"
+                - id: "work"
+                  name: "Work"
   /tags/{tag}/recommended-authors:
     get:
       tags:
