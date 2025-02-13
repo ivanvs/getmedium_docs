@@ -11,7 +11,7 @@ paths:
     get:
       tags:
         - tags
-      summary: Get Tag
+      summary: Get Tag by ID
       description: This endpoint allows you to retrieve detailed information about a specific **tag** on Medium, including its name, description, popularity metrics. This is useful for analyzing tag trends, building content discovery tools, or integrating tag data into your applications.
       operationId: getTag
       parameters:
@@ -28,7 +28,30 @@ paths:
           description: Unique identifier of tag
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FullTag"
+              example:
+                id: "golang"
+                name: "Golang"
+                slug: "golang"
+                followersCount: 15862
+                postCount: 26908
+                children: []
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                timestamp: "2025-02-13T19:02:54.477Z"
+                statusCode: 404
+                error: "Route not found"
+                message: "Route not found. Method: GET, path: /nesto"
+                path: "/nesto"
   /tags/{tag}/related:
     get:
       tags:
@@ -1054,6 +1077,45 @@ paths:
       responses:
         "200":
           description: ""
+components:
+  schemas:
+    FullTag:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        name:
+          type: "string"
+        slug:
+          type: "string"
+        followersCount:
+          type: "integer"
+        postCount:
+          type: "integer"
+        children:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ChildrenTag"
+    ChildrenTag:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        name:
+          type: "string"
+    Error:
+      type: "object"
+      properties:
+        timestamp:
+          type: string
+        statusCode:
+          type: integer
+        error:
+          type: string
+        message:
+          type: string
+        path:
+          type: string
 tags:
   - name: articles
     description: "The **Articles Endpoints** allow you to programmatically  \nretrieve detailed information about articles published on Medium.com.  \nWhether you're analyzing trends, building content aggregators, or  \nconducting research, these endpoints provide access to a wide range of  \narticle-related data, including titles, content, engagement metrics, and  \nmore."
