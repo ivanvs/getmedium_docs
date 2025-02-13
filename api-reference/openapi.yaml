@@ -56,7 +56,7 @@ paths:
     get:
       tags:
         - tags
-      summary: Related Tags
+      summary: Get Related Tags for Tag
       description: "This endpoint allows you to retrieve a list of **related tags**  \nfor a specific tag on Medium. Related tags are determined based on factors such as shared topics, user engagement, or content overlap. This is useful for building content discovery tools, analyzing tag relationships, or enhancing recommendation systems."
       operationId: relatedTags
       parameters:
