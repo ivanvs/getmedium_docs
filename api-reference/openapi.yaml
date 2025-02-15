@@ -172,7 +172,7 @@ paths:
     get:
       tags:
         - tags
-      summary: Recommended Lists
+      summary: Get Recommended Lists for Tag
       description: This endpoint allows you to retrieve a list of **recommended lists** (e.g., reading lists, curated collections) that are associated with a specific tag. These lists are typically created by Medium users or publications and can provide valuable insights into how the tag is being categorized, shared, or recommended within the Medium ecosystem.
       operationId: recommendedLists
       parameters:
@@ -189,7 +189,26 @@ paths:
           description: Unique identifier of tag
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RefList"
+              example:
+                - id: "b28a34519546"
+                  name: "Apple's Vision Pro"
+                  creator:
+                    id: "1f3525a89b41"
+                    name: "Nuno Moreira"
+                    username: "nmoreira"
+                - id: "541154dfb3ae"
+                  name: "Tech & Tools"
+                  creator:
+                    id: "53853e5893fb"
+                    name: "Josh Buesseler"
+                    username: "wearedelicious"
   /tags/{tag}/top-articles:
     get:
       tags:
@@ -1162,6 +1181,24 @@ components:
           type: string
         type:
           type: string
+    Author:
+      type: "object"
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        username:
+          type: string
+    RefList:
+      type: "object"
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        creator:
+          $ref: "#/components/schemas/Author"
     Error:
       type: "object"
       properties:
