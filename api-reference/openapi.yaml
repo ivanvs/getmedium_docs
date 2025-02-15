@@ -120,7 +120,7 @@ paths:
     get:
       tags:
         - tags
-      summary: Recommended Authors
+      summary: Get Recommended Authors for Tag
       description: This endpoint allows you to retrieve a list of **recommended authors** who frequently write about a specific tag. These authors are selected based on their expertise, engagement metrics, and the popularity of their articles related to the tag. This is useful for discovering influential writers, building recommendation systems, or enhancing content discovery.
       operationId: recommendedAuthors
       parameters:
@@ -143,7 +143,31 @@ paths:
           description: A unique string (cursor/token) that represents the starting point for the next set of authors. Omit this parameter for the first request.
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nextPage:
+                    type: "object"
+                    properties:
+                      id:
+                        type: string
+                  publishers:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/RecommendedAuthor"
+              example:
+                nextPage:
+                  id: "b1cc3935b07d"
+                publishers:
+                  - id: "02c54ef008b2"
+                    name: "Shivam Srivastava"
+                    type: "USER"
+                  - id: "d3a191ac6ed"
+                    name: "Javarevisited"
+                    type: "PUBLICATION"
   /tags/{tag}/recommended-lists:
     get:
       tags:
@@ -1129,6 +1153,15 @@ components:
           type: "string"
         name:
           type: "string"
+    RecommendedAuthor:
+      type: "object"
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
     Error:
       type: "object"
       properties:
