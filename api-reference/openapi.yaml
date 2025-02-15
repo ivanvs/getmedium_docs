@@ -213,7 +213,7 @@ paths:
     get:
       tags:
         - tags
-      summary: Top Articles
+      summary: Get Top Articles for Tag
       description: Retrieve the most popular articles on Medium for a specific tag. This endpoint allows you to identify trending content and explore topics of interest. The endpoint will return 15 top articles for given topic.
       operationId: topArticles
       parameters:
@@ -230,7 +230,32 @@ paths:
           description: Unique identifier of tag
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RefArticle"
+              example:
+                - articleId: "e07383f22844"
+                  title: "Three Months With the M4 Mac mini"
+                  imageUrl: "https://miro.medium.com/1*9POXgGoTcMJgnWtHQmnrTQ.jpeg"
+                  url: "https://medium.com/macoclock/three-months-with-the-m4-mac-mini-e07383f22844"
+                  slug: "three-months-with-the-m4-mac-mini-e07383f22844"
+                  author:
+                    id: "665f2b5379e3"
+                    name: "Mark Ellis"
+                    username: "markellisreviews"
+                - articleId: "bd9a4566dfb9"
+                  title: "Forgetfulness & ADHD? How This Simple App Saved My Workday (And My Sanity)"
+                  imageUrl: "https://miro.medium.com/1*koRRjS0h_Jgr6cDepOK8Mg.png"
+                  url: "https://medium.com/humans-with-adhd/forgetfulness-adhd-how-this-simple-app-saved-my-workday-and-my-sanity-bd9a4566dfb9"
+                  slug: "forgetfulness-adhd-how-this-simple-app-saved-my-workday-and-my-sanity-bd9a4566dfb9"
+                  author:
+                    id: "7b38efbebd4"
+                    name: "Gray Miller"
+                    username: "graymiller"
   /tags/{tag}/latest-articles:
     get:
       tags:
@@ -1198,6 +1223,21 @@ components:
         name:
           type: string
         creator:
+          $ref: "#/components/schemas/Author"
+    RefArticle:
+      type: "object"
+      properties:
+        articleId:
+          type: string
+        title:
+          type: string
+        imageUrl:
+          type: string
+        url:
+          type: string
+        slug:
+          type: string
+        author:
           $ref: "#/components/schemas/Author"
     Error:
       type: "object"
