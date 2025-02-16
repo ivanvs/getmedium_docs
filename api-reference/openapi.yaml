@@ -653,7 +653,7 @@ paths:
     get:
       tags:
         - publications
-      summary: Articles
+      summary: Get Publication Articles
       description: |-
         Get publication articles
 
@@ -685,7 +685,48 @@ paths:
           description: A unique string (cursor/token) that represents the starting point for the next set of responses. Omit this parameter for the first request.
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  publicationId:
+                    type: string
+                  articles:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/PublicationArticle"
+                  nextPage:
+                    $ref: "#/components/schemas/FromPaging"
+
+              example:
+                publicationId: 5517fd7b58a6
+                articles:
+                  - publicationId: 5517fd7b58a6
+                    articleId: 619a7532a47e
+                    title: "The LLMs’ Dilemma: Thinking Too Much OR Too Little?"
+                    imageUrl: https://miro.medium.com/1*fpktfQ3Sor_-dinw2XHgoQ.jpeg
+                    url: https://levelup.gitconnected.com/the-llms-dilemma-thinking-too-much-or-too-little-619a7532a47e
+                    slug: the-llms-dilemma-thinking-too-much-or-too-little-619a7532a47e
+                    author:
+                      id: f1a08d9452cd
+                      name: Salvatore Raieli
+                      username: salvatore-raieli
+                  - publicationId: 5517fd7b58a6
+                    articleId: 0ecfd29e0b04
+                    title: Multi-Head Latent Attention Is The Powerful Engine Behind DeepSeek
+                    imageUrl: https://miro.medium.com/1*sMhHLkzpp1p0bAl9pHrN5w.jpeg
+                    url: https://levelup.gitconnected.com/multi-head-latent-attention-is-the-powerful-engine-behind-deepseek-0ecfd29e0b04
+                    slug: multi-head-latent-attention-is-the-powerful-engine-behind-deepseek-0ecfd29e0b04
+                    author:
+                      id: f10e9a50984a
+                      name: Dr. Ashish Bamania
+                      username: bamania-ashish
+                nextPage:
+                  limit: 10
+                  from: L1739498285515
+
   /publications/search:
     get:
       tags:
@@ -719,7 +760,33 @@ paths:
           description: "The page number to fetch. Starts at 0. Default: 0."
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  publications:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/RefPublication"
+                  nextPage:
+                    $ref: "#/components/schemas/PagePaging"
+
+              example:
+                publications:
+                  - id: 8e5bb002faf4
+                    name: DataFlair
+                    domain: null
+                    slug: dataflair
+                  - id: c70660e00f49
+                    name: The Fresh Writes
+                    domain: null
+                    slug: thefreshwrites
+                nextPage:
+                  page: 2
+                  limit: 20
+
   /users/{username}:
     get:
       tags:
@@ -1447,7 +1514,7 @@ components:
       type: "object"
       properties:
         from:
-          type: integer
+          type: string
         limit:
           type: integer
     PagePaging:
@@ -1518,6 +1585,35 @@ components:
         promoBody:
           type: string
         promoHeadline:
+          type: string
+    PublicationArticle:
+      type: "object"
+      properties:
+        publicationId:
+          type: string
+        articleId:
+          type: string
+        title:
+          type: string
+        imageUrl:
+          type: string
+        url:
+          type: string
+        slug:
+          type: string
+        author:
+          $ref: "#/components/schemas/Author"
+
+    RefPublication:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        domain:
+          type: string
+        slug:
           type: string
 
     Error:
