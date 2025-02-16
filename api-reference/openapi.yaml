@@ -260,7 +260,7 @@ paths:
     get:
       tags:
         - tags
-      summary: Latest Articles
+      summary: Get Latest Articles for Tag
       description: Fetch the newest articles on Medium associated with a given tag. This endpoint is ideal for staying up-to-date on the latest discussions and trends. The endpoint will return 20 latest articles
       operationId: latestArticles
       parameters:
@@ -277,7 +277,32 @@ paths:
           description: Unique identifier of tag
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RefArticle"
+              example:
+                - "articleId": "0e2305664552"
+                  "title": "Lind L. Tailor"
+                  "imageUrl": "https://miro.medium.com/"
+                  "url": "https://medium.com/@hristiyan-andreev85/lind-l-tailor-0e2305664552"
+                  "slug": "lind-l-tailor-0e2305664552"
+                  "author":
+                    "id": "16193e343ec1"
+                    "name": "MVR Plovdiv"
+                    "username": "hristiyan-andreev85"
+                - "articleId": "1c6fd5a89bb3"
+                  "title": "Apple vs. Google: The Battle for Tech Dominance in 2025"
+                  "imageUrl": "https://miro.medium.com/1*LShkxvxyT4sl9bEbFmWh6g@2x.jpeg"
+                  "url": "https://snappyroots.medium.com/apple-vs-google-the-battle-for-tech-dominance-in-2025-1c6fd5a89bb3"
+                  "slug": "apple-vs-google-the-battle-for-tech-dominance-in-2025-1c6fd5a89bb3"
+                  "author":
+                    "id": "9e6a66ca4a7a"
+                    "name": "sNappyRooTs"
+                    "username": "snappyroots"
   /tags/{tag}/recommended-articles:
     get:
       tags:
