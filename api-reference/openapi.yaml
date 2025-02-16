@@ -517,7 +517,7 @@ paths:
     get:
       tags:
         - publications
-      summary: Get Publication
+      summary: Get Publication by ID
       description: Get publication by ID. Retrieve comprehensive information about a specific publication, including its description, subscriber coun, and other relevant data.
       operationId: getPublication
       parameters:
@@ -534,7 +534,56 @@ paths:
           description: Unique identifier of publication
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Publication"
+              example:
+                id: 5517fd7b58a6
+                domain: levelup.gitconnected.com
+                slug: gitconnected
+                name: Level Up Coding
+                avatarImageUrl: https://miro.medium.com/1*5D9oYBd58pyjMkV_5-zXXQ.jpeg
+                logoUrl: https://miro.medium.com/1*s0Iaylh9dPk6zGjlVZasIA.jpeg
+                subscriberCount: 203917
+                creator:
+                  id: 47e700e59e44
+                  name: Trey Huffine
+                  username: treyhuffine
+                description: Coding tutorials and news. The developer homepage gitconnected.com && skilled.dev && levelup.dev
+                tags:
+                  - PROGRAMMING
+                  - ARTIFICIAL INTELLIGENCE
+                  - SOFTWARE ENGINEERING
+                twiterUsername: gitconnected
+                facebookPageName: gitconnectednetwork
+                instagramUsername: skilled.dev
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                timestamp: "2025-02-16T22:35:42.818Z"
+                statusCode: 400
+                error: Medium communication error
+                message: '"Cannot read properties of null (reading ''id'')"'
+                path: /5517fd758a6
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                timestamp: "2025-02-16T22:43:19.676Z"
+                statusCode: 404
+                error: Route not found
+                message: "Route not found. Method: GET, path: /5517fd4758a6"
+                path: /5517fd4758a6
+
   /publications/{publication_id}/newsletter:
     get:
       tags:
@@ -1368,6 +1417,45 @@ components:
           type: integer
         limit:
           type: integer
+    Publication:
+      type: object
+      properties:
+        id:
+          type: string
+        domain:
+          type: string
+        slug:
+          type: string
+        name:
+          type: string
+        avatarImageUrl:
+          type: string
+        logoUrl:
+          type: string
+        subscriberCount:
+          type: integer
+        creator:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            username:
+              type: string
+        description:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        twiterUsername:
+          type: string
+        facebookPageName:
+          type: string
+        instagramUsername:
+          type: string
+
     Error:
       type: "object"
       properties:
