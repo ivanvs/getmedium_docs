@@ -459,7 +459,6 @@ paths:
                       username: janoleroux
                 nextPage:
                   id: "19"
-
   /tags/search:
     get:
       tags:
@@ -493,7 +492,27 @@ paths:
           description: "The page number to fetch. Starts at 0. Default: 0."
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tags:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/ChildrenTag"
+                  nextPage:
+                    $ref: "#/components/schemas/PagePaging"
+              example:
+                tags:
+                  - id: javascript-tutorial
+                    name: Javascript Tutorial
+                  - id: javascript30
+                    name: Javascript30
+                nextPage:
+                  page: 2
+                  limit: 20
   /publications/{publication_id}:
     get:
       tags:
@@ -1339,6 +1358,13 @@ components:
       type: "object"
       properties:
         from:
+          type: integer
+        limit:
+          type: integer
+    PagePaging:
+      type: "object"
+      properties:
+        page:
           type: integer
         limit:
           type: integer
