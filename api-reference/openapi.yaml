@@ -307,7 +307,7 @@ paths:
     get:
       tags:
         - tags
-      summary: Recommended Articles
+      summary: Get Recommended Articles for Tag
       description: Fetch a list of Medium articles recommended for a given tag.
       operationId: recommendedArticles
       parameters:
@@ -325,18 +325,52 @@ paths:
         - name: from
           in: query
           schema:
-            type: string
-            example: "10"
+            type: integer
+            example: 10
           description: The offset from which to start retrieving articles.  This is used for pagination.  Default is 0 (start from the beginning).
         - name: limit
           in: query
           schema:
-            type: string
-            example: "25"
+            type: integer
+            example: 25
           description: "Limit the number of response returned (default: 10, max: 25, min: 1)."
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nextPage:
+                    $ref: "#/components/schemas/FromPaging"
+                  articles:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/RefArticle"
+              example:
+                "nextPage":
+                  "from": "10"
+                  "limit": 10
+                "articles":
+                  - "articleId": "259268329196"
+                    "title": "7 Mac Apps So Powerful, They Feel Illegal"
+                    "imageUrl": "https://miro.medium.com/0*Xdgq64HaW81Mpe_F"
+                    "url": "https://medium.com/@hii_mohit/7-mac-apps-so-powerful-they-feel-illegal-259268329196"
+                    "slug": "7-mac-apps-so-powerful-they-feel-illegal-259268329196"
+                    "author":
+                      "id": "6f66ae10be79"
+                      "name": "Mohit Vaswani"
+                      "username": "hii_mohit"
+                  - "articleId": "91c965eee62d"
+                    "title": "Is the Apple Alibaba deal the start of something big, or simply a short-term solution?"
+                    "imageUrl": "https://miro.medium.com/1*wVvL3ww5z1DuD3-Gfr4iUQ.jpeg"
+                    "url": "https://medium.com/enrique-dans/is-the-apple-alibaba-deal-the-start-of-something-big-or-simply-a-short-term-solution-91c965eee62d"
+                    "slug": "is-the-apple-alibaba-deal-the-start-of-something-big-or-simply-a-short-term-solution-91c965eee62d"
+                    "author":
+                      "id": "acfc0d77aeef"
+                      "name": "Enrique Dans"
+                      "username": "edans"
   /tags/{tag}/archived-articles:
     get:
       tags:
@@ -1264,6 +1298,13 @@ components:
           type: string
         author:
           $ref: "#/components/schemas/Author"
+    FromPaging:
+      type: "object"
+      properties:
+        from:
+          type: integer
+        limit:
+          type: integer
     Error:
       type: "object"
       properties:
