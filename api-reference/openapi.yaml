@@ -375,7 +375,7 @@ paths:
     get:
       tags:
         - tags
-      summary: Archived Articles
+      summary: Search Archived Articles
       description: Access historical content on Medium for any tag. This endpoint allows you to delve into past articles and research trends over time.
       operationId: archivedArticles
       parameters:
@@ -422,7 +422,44 @@ paths:
           description: The token of the next page to retrieve.  This is used for pagination.  If not provided, the first page is returned.
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nextPage:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                  articles:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/RefArticle"
+              example:
+                articles:
+                  - articleId: 78e0c7641d4d
+                    title: Can You Pass This Apple-Orange Interview At Apple 🍎?
+                    imageUrl: https://miro.medium.com/1*3_NjzkVEbMhPwJTH9BajWw.png
+                    url: https://medium.com/illumination/can-you-pass-this-apple-orange-interview-at-apple-78e0c7641d4d
+                    slug: can-you-pass-this-apple-orange-interview-at-apple-78e0c7641d4d
+                    author:
+                      id: 317d2c36c3c2
+                      name: BL
+                      username: mathgames
+                  - articleId: 1ff5ec912c44
+                    title: Apple Just Silently Launched A Mind-blowing Feature And Nobody Is Talking About It
+                    imageUrl: https://miro.medium.com/1*iCy3qoUqT9Hoeyjyti-97A.png
+                    url: https://ideaswithwings.org/apple-just-silently-launched-a-mind-blowing-feature-and-nobody-is-talking-about-it-1ff5ec912c44
+                    slug: apple-just-silently-launched-a-mind-blowing-feature-and-nobody-is-talking-about-it-1ff5ec912c44
+                    author:
+                      id: 245df26bd36b
+                      name: Jano le Roux
+                      username: janoleroux
+                nextPage:
+                  id: "19"
+
   /tags/search:
     get:
       tags:
