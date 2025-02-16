@@ -588,7 +588,7 @@ paths:
     get:
       tags:
         - publications
-      summary: Newsletter
+      summary: Get Publication Newsletter
       description: |-
         Get publication newsletter
 
@@ -608,7 +608,47 @@ paths:
           description: Unique identifier of publication
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicationNewsletter"
+              example:
+                id: 73ee478940e7
+                name: Top Stories
+                description: A monthly summary of the best stories shared in Level Up Coding
+                slug: top-stories
+                creator:
+                  id: 47e700e59e44
+                  name: Trey Huffine
+                  username: treyhuffine
+                promoBody: ""
+                promoHeadline: ""
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                timestamp: "2025-02-16T22:48:08.316Z"
+                statusCode: 400
+                error: Medium communication error
+                message: '"Cannot destructure property ''newsletterV3'' of ''t.data[0].data.collection'' as it is null."'
+                path: /5517ff7b58a6/newsletter
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                timestamp: "2025-02-16T22:56:01.445Z"
+                statusCode: 404
+                error: Route not found
+                message: "Route not found. Method: GET, path: /5517ff7b58a6/newsletter"
+                path: /5517ff7b58a6/newsletter
+
   /publications/{publication_id}/articles:
     get:
       tags:
@@ -1454,6 +1494,30 @@ components:
         facebookPageName:
           type: string
         instagramUsername:
+          type: string
+    PublicationNewsletter:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        slug:
+          type: string
+        creator:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            username:
+              type: string
+        promoBody:
+          type: string
+        promoHeadline:
           type: string
 
     Error:
