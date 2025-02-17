@@ -149,10 +149,10 @@ paths:
               schema:
                 type: object
                 properties:
-                  nextPage: 
+                  nextPage:
                     type: "object"
-                    properties: 
-                      id: 
+                    properties:
+                      id:
                         type: string
                   publishers:
                     type: array
@@ -161,13 +161,13 @@ paths:
               example:
                 nextPage:
                   id: "b1cc3935b07d"
-                publishers: 
-                      - id: "02c54ef008b2"
-                        name: "Shivam Srivastava"
-                        type: "USER"
-                      - id: "d3a191ac6ed"
-                        name: "Javarevisited"
-                        type: "PUBLICATION"
+                publishers:
+                  - id: "02c54ef008b2"
+                    name: "Shivam Srivastava"
+                    type: "USER"
+                  - id: "d3a191ac6ed"
+                    name: "Javarevisited"
+                    type: "PUBLICATION"
   /tags/{tag}/recommended-lists:
     get:
       tags:
@@ -205,7 +205,7 @@ paths:
                     username: "nmoreira"
                 - id: "541154dfb3ae"
                   name: "Tech & Tools"
-                  creator: 
+                  creator:
                     id: "53853e5893fb"
                     name: "Josh Buesseler"
                     username: "wearedelicious"
@@ -243,16 +243,16 @@ paths:
                   imageUrl: "https://miro.medium.com/1*9POXgGoTcMJgnWtHQmnrTQ.jpeg"
                   url: "https://medium.com/macoclock/three-months-with-the-m4-mac-mini-e07383f22844"
                   slug: "three-months-with-the-m4-mac-mini-e07383f22844"
-                  author: 
-                      id: "665f2b5379e3"
-                      name: "Mark Ellis"
-                      username: "markellisreviews"
+                  author:
+                    id: "665f2b5379e3"
+                    name: "Mark Ellis"
+                    username: "markellisreviews"
                 - articleId: "bd9a4566dfb9"
                   title: "Forgetfulness & ADHD? How This Simple App Saved My Workday (And My Sanity)"
                   imageUrl: "https://miro.medium.com/1*koRRjS0h_Jgr6cDepOK8Mg.png"
                   url: "https://medium.com/humans-with-adhd/forgetfulness-adhd-how-this-simple-app-saved-my-workday-and-my-sanity-bd9a4566dfb9"
                   slug: "forgetfulness-adhd-how-this-simple-app-saved-my-workday-and-my-sanity-bd9a4566dfb9"
-                  author: 
+                  author:
                     id: "7b38efbebd4"
                     name: "Gray Miller"
                     username: "graymiller"
@@ -290,19 +290,19 @@ paths:
                   "imageUrl": "https://miro.medium.com/"
                   "url": "https://medium.com/@hristiyan-andreev85/lind-l-tailor-0e2305664552"
                   "slug": "lind-l-tailor-0e2305664552"
-                  "author": 
-                      "id": "16193e343ec1"
-                      "name": "MVR Plovdiv"
-                      "username": "hristiyan-andreev85"
+                  "author":
+                    "id": "16193e343ec1"
+                    "name": "MVR Plovdiv"
+                    "username": "hristiyan-andreev85"
                 - "articleId": "1c6fd5a89bb3"
                   "title": "Apple vs. Google: The Battle for Tech Dominance in 2025"
                   "imageUrl": "https://miro.medium.com/1*LShkxvxyT4sl9bEbFmWh6g@2x.jpeg"
                   "url": "https://snappyroots.medium.com/apple-vs-google-the-battle-for-tech-dominance-in-2025-1c6fd5a89bb3"
                   "slug": "apple-vs-google-the-battle-for-tech-dominance-in-2025-1c6fd5a89bb3"
                   "author":
-                      "id": "9e6a66ca4a7a"
-                      "name": "sNappyRooTs"
-                      "username": "snappyroots"
+                    "id": "9e6a66ca4a7a"
+                    "name": "sNappyRooTs"
+                    "username": "snappyroots"
   /tags/{tag}/recommended-articles:
     get:
       tags:
@@ -358,19 +358,19 @@ paths:
                     "imageUrl": "https://miro.medium.com/0*Xdgq64HaW81Mpe_F"
                     "url": "https://medium.com/@hii_mohit/7-mac-apps-so-powerful-they-feel-illegal-259268329196"
                     "slug": "7-mac-apps-so-powerful-they-feel-illegal-259268329196"
-                    "author": 
-                        "id": "6f66ae10be79"
-                        "name": "Mohit Vaswani"
-                        "username": "hii_mohit"
+                    "author":
+                      "id": "6f66ae10be79"
+                      "name": "Mohit Vaswani"
+                      "username": "hii_mohit"
                   - "articleId": "91c965eee62d"
                     "title": "Is the Apple Alibaba deal the start of something big, or simply a short-term solution?"
                     "imageUrl": "https://miro.medium.com/1*wVvL3ww5z1DuD3-Gfr4iUQ.jpeg"
                     "url": "https://medium.com/enrique-dans/is-the-apple-alibaba-deal-the-start-of-something-big-or-simply-a-short-term-solution-91c965eee62d"
                     "slug": "is-the-apple-alibaba-deal-the-start-of-something-big-or-simply-a-short-term-solution-91c965eee62d"
-                    "author": 
-                        "id": "acfc0d77aeef"
-                        "name": "Enrique Dans"
-                        "username": "edans"
+                    "author":
+                      "id": "acfc0d77aeef"
+                      "name": "Enrique Dans"
+                      "username": "edans"
   /tags/{tag}/archived-articles:
     get:
       tags:
@@ -431,7 +431,7 @@ paths:
                   nextPage:
                     type: object
                     properties:
-                      id: 
+                      id:
                         type: string
                   articles:
                     type: array
@@ -458,7 +458,7 @@ paths:
                       name: Jano le Roux
                       username: janoleroux
                 nextPage:
-                  id: '19'
+                  id: "19"
   /tags/search:
     get:
       tags:
@@ -538,7 +538,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Publication'
+                $ref: "#/components/schemas/Publication"
               example:
                 id: 5517fd7b58a6
                 domain: levelup.gitconnected.com
@@ -564,9 +564,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
               example:
-                timestamp: '2025-02-16T22:35:42.818Z'
+                timestamp: "2025-02-16T22:35:42.818Z"
                 statusCode: 400
                 error: Medium communication error
                 message: '"Cannot read properties of null (reading ''id'')"'
@@ -576,14 +576,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
               example:
-                timestamp: '2025-02-16T22:43:19.676Z'
+                timestamp: "2025-02-16T22:43:19.676Z"
                 statusCode: 404
                 error: Route not found
-                message: 'Route not found. Method: GET, path: /5517fd4758a6'
+                message: "Route not found. Method: GET, path: /5517fd4758a6"
                 path: /5517fd4758a6
-                
+
   /publications/{publication_id}/newsletter:
     get:
       tags:
@@ -622,8 +622,8 @@ paths:
                   id: 47e700e59e44
                   name: Trey Huffine
                   username: treyhuffine
-                promoBody: ''
-                promoHeadline: ''
+                promoBody: ""
+                promoHeadline: ""
         "400":
           description: Bad Request
           content:
@@ -631,7 +631,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
               example:
-                timestamp: '2025-02-16T22:48:08.316Z'
+                timestamp: "2025-02-16T22:48:08.316Z"
                 statusCode: 400
                 error: Medium communication error
                 message: '"Cannot destructure property ''newsletterV3'' of ''t.data[0].data.collection'' as it is null."'
@@ -643,10 +643,10 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
               example:
-                timestamp: '2025-02-16T22:56:01.445Z'
+                timestamp: "2025-02-16T22:56:01.445Z"
                 statusCode: 404
                 error: Route not found
-                message: 'Route not found. Method: GET, path: /5517ff7b58a6/newsletter'
+                message: "Route not found. Method: GET, path: /5517ff7b58a6/newsletter"
                 path: /5517ff7b58a6/newsletter
 
   /publications/{publication_id}/articles:
@@ -699,13 +699,13 @@ paths:
                       $ref: "#/components/schemas/PublicationArticle"
                   nextPage:
                     $ref: "#/components/schemas/FromPaging"
-                
+
               example:
                 publicationId: 5517fd7b58a6
                 articles:
                   - publicationId: 5517fd7b58a6
                     articleId: 619a7532a47e
-                    title: 'The LLMs’ Dilemma: Thinking Too Much OR Too Little?'
+                    title: "The LLMs’ Dilemma: Thinking Too Much OR Too Little?"
                     imageUrl: https://miro.medium.com/1*fpktfQ3Sor_-dinw2XHgoQ.jpeg
                     url: https://levelup.gitconnected.com/the-llms-dilemma-thinking-too-much-or-too-little-619a7532a47e
                     slug: the-llms-dilemma-thinking-too-much-or-too-little-619a7532a47e
@@ -726,7 +726,7 @@ paths:
                 nextPage:
                   limit: 10
                   from: L1739498285515
-                
+
   /publications/search:
     get:
       tags:
@@ -772,7 +772,7 @@ paths:
                       $ref: "#/components/schemas/RefPublication"
                   nextPage:
                     $ref: "#/components/schemas/PagePaging"
-                
+
               example:
                 publications:
                   - id: 8e5bb002faf4
@@ -786,7 +786,7 @@ paths:
                 nextPage:
                   page: 2
                   limit: 20
-                
+
   /users/{username}:
     get:
       tags:
@@ -813,7 +813,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/User"
-                
+
               example:
                 id: ebfa13fe3f0a
                 name: Java Jedi
@@ -843,7 +843,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
               example:
-                timestamp: '2025-02-17T16:18:20.761Z'
+                timestamp: "2025-02-17T16:18:20.761Z"
                 statusCode: 400
                 error: Medium communication error
                 message: '"Cannot read properties of null (reading ''type'')"'
@@ -855,10 +855,10 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
               example:
-                timestamp: '2025-02-17T16:31:22.545Z'
+                timestamp: "2025-02-17T16:31:22.545Z"
                 statusCode: 404
                 error: Route not found
-                message: 'Route not found. Method: GET, path: /test'
+                message: "Route not found. Method: GET, path: /test"
                 path: /test
 
   /users/{username}/books:
@@ -1523,58 +1523,58 @@ components:
     RecommendedAuthor:
       type: "object"
       properties:
-        id: 
+        id:
           type: string
-        name: 
+        name:
           type: string
-        type: 
+        type:
           type: string
     Author:
       type: "object"
       properties:
-        id: 
+        id:
           type: string
-        name: 
+        name:
           type: string
-        username: 
+        username:
           type: string
     RefList:
       type: "object"
       properties:
-        id: 
+        id:
           type: string
-        name: 
+        name:
           type: string
-        creator: 
+        creator:
           $ref: "#/components/schemas/Author"
     RefArticle:
       type: "object"
       properties:
-        articleId: 
+        articleId:
           type: string
-        title: 
+        title:
           type: string
-        imageUrl: 
+        imageUrl:
           type: string
-        url: 
+        url:
           type: string
-        slug: 
+        slug:
           type: string
-        author: 
+        author:
           $ref: "#/components/schemas/Author"
     FromPaging:
       type: "object"
       properties:
-        from: 
+        from:
           type: string
-        limit: 
+        limit:
           type: integer
     PagePaging:
       type: "object"
       properties:
-        page: 
+        page:
           type: integer
-        limit: 
+        limit:
           type: integer
     Publication:
       type: object
@@ -1655,7 +1655,7 @@ components:
           type: string
         author:
           $ref: "#/components/schemas/Author"
-    
+
     RefPublication:
       type: object
       properties:
@@ -1667,7 +1667,7 @@ components:
           type: string
         slug:
           type: string
-    
+
     User:
       type: object
       properties:
@@ -1689,8 +1689,8 @@ components:
           type: string
         logoImage:
           type:
-            - 'null'
-            - ' string'
+            - "null"
+            - " string"
         followersCount:
           type: integer
         followingCount:
@@ -1701,8 +1701,8 @@ components:
           type: string
         tippingLink:
           type:
-            - 'null'
-            - ' string'
+            - "null"
+            - " string"
         isSuspended:
           type: boolean
         isBookAuthor:
@@ -1717,10 +1717,9 @@ components:
           type: array
         createdAt:
           type:
-            - 'null'
-            - ' string'
-      
-    
+            - "null"
+            - " string"
+
     Error:
       type: "object"
       properties:
