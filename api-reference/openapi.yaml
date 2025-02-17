@@ -1688,9 +1688,7 @@ components:
         backgroundImage:
           type: string
         logoImage:
-          type:
-            - "null"
-            - " string"
+          type: string
         followersCount:
           type: integer
         followingCount:
@@ -1700,9 +1698,7 @@ components:
         twitter:
           type: string
         tippingLink:
-          type:
-            - "null"
-            - " string"
+          type: string
         isSuspended:
           type: boolean
         isBookAuthor:
@@ -1713,12 +1709,14 @@ components:
           type: integer
         topWriterInTags:
           type: array
+          items:
+            type: string
         pronouns:
           type: array
+          items:
+            type: string
         createdAt:
-          type:
-            - "null"
-            - " string"
+          type: string
 
     Error:
       type: "object"
