@@ -1179,7 +1179,7 @@ paths:
     get:
       tags:
         - users
-      summary: Followers
+      summary: Get User Followers
       description: Get author followers. Fetch a list of users who are following a given author. This endpoint provides information about the users who have subscribed to or follow an author.
       operationId: followers
       parameters:
@@ -1208,12 +1208,42 @@ paths:
           description: "Limit the number of response returned (default: 20, max: 25, min: 1)."
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  followers:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Author"
+                  nextPage:
+                    $ref: "#/components/schemas/FromPaging"
+                  username:
+                    type: string
+                  followersCount:
+                    type: integer
+
+              example:
+                followers:
+                  - id: 11540f1d8f7
+                    name: Onyebuchiemmress
+                    username: onyebuchiemmress
+                  - id: 117614d7351b
+                    name: Suksa N
+                    username: devrabbiz
+                nextPage:
+                  from: "136663019227"
+                  limit: 20
+                username: sbipe
+                followersCount: 2400
+
   /users/{username}/articles:
     get:
       tags:
         - users
-      summary: Articles
+      summary: Get User Articles
       description: Fetch a list of articles published by a specific user.
       operationId: articles1
       parameters:
@@ -1242,7 +1272,33 @@ paths:
           description: "Limit the number of artucles returned (default: 20, max: 25)."
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  page:
+                    $ref: "#/components/schemas/FromPaging"
+                  articles:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/UserArticle"
+
+              example:
+                page:
+                  limit: 20
+                  from: L1630301172379
+                articles:
+                  - id: d2d1939cfe5c
+                    title: "Writer of the Week: James Bryce"
+                    slug: writer-of-the-week-james-bryce-d2d1939cfe5c
+                    url: https://javascript.plainenglish.io/writer-of-the-week-james-bryce-d2d1939cfe5c
+                  - id: f75ab0a4ae4e
+                    title: "Writer of the Week: Emily Y Leung"
+                    slug: writer-of-the-week-emily-y-leung-f75ab0a4ae4e
+                    url: https://javascript.plainenglish.io/writer-of-the-week-emily-y-leung-f75ab0a4ae4e
+
   /articles/{article_id}:
     get:
       tags:
@@ -1869,6 +1925,18 @@ components:
           items:
             type: string
         createdAt:
+          type: string
+
+    UserArticle:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        slug:
+          type: string
+        url:
           type: string
 
     UserList:
