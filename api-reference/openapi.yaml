@@ -1065,7 +1065,7 @@ paths:
     get:
       tags:
         - users
-      summary: Publications User Following
+      summary: Get Publications User is Following
       description: "Get following publications.  \n  \nFetch a list of publications that a specific user is following. This endpoint provides information about the publications a user has subscribed to or follows."
       operationId: publicationsUserFollowing
       parameters:
@@ -1082,12 +1082,37 @@ paths:
           description: A username is a unique identifier for a user on Medium
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                  publications:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/PublicationFollowing"
+                  count:
+                    type: integer
+
+              example:
+                username: robince885
+                publications:
+                  - id: 15f753907972
+                    slug: blog
+                    name: The Medium Blog
+                  - id: 7b6769f2748b
+                    slug: marker
+                    name: Marker
+                count: 2
+
   /users/{username}/following:
     get:
       tags:
         - users
-      summary: Following Users
+      summary: Get Authors That User is Following
       description: |-
         Get authors author is following
 
@@ -1119,7 +1144,37 @@ paths:
           description: "Limit the number of response returned (default: 20, max: 25, min: 1)."
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  following:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Author"
+                  nextPage:
+                    $ref: "#/components/schemas/FromPaging"
+                  username:
+                    type: string
+                  followersCount:
+                    type: integer
+
+              example:
+                following:
+                  - id: a5639a6e3431
+                    name: Aymar Sossou
+                    username: saymar90
+                  - id: 7d8e5127a573
+                    name: Kem-Laurin Lubin, Ph.D-C
+                    username: kemlaurin
+                nextPage:
+                  from: "1687388185882"
+                  limit: 20
+                username: sbipe
+                followersCount: 2400
+
   /users/{username}/followers:
     get:
       tags:
@@ -1752,6 +1807,16 @@ components:
         name:
           type: string
         domain:
+          type: string
+        slug:
+          type: string
+
+    PublicationFollowing:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
           type: string
         slug:
           type: string
