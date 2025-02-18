@@ -936,7 +936,31 @@ paths:
           description: "The page number to fetch. Starts at 0. Default: 0."
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Author"
+                  nextPage:
+                    $ref: "#/components/schemas/PagePaging"
+
+              example:
+                users:
+                  - id: ebfa13fe3f0a
+                    name: Java Jedi
+                    username: java-jedi
+                  - id: d171687763fe
+                    name: Java Daily Digest
+                    username: java.daily
+                nextPage:
+                  page: 2
+                  limit: 20
+
   /users/{username}/lists:
     get:
       tags:
