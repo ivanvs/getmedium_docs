@@ -1022,7 +1022,7 @@ paths:
     get:
       tags:
         - users
-      summary: Publications
+      summary: Get User Publications
       description: "Get user publications  \n  \nFetch a list of publications created or owned by a specific user. This endpoint provides information about the publications associated with a user's account."
       operationId: publications
       parameters:
@@ -1039,7 +1039,28 @@ paths:
           description: A username is a unique identifier for a user on Medium
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RefPublication"
+
+              example:
+                - id: 4b3a1ed4f11c
+                  name: JavaScript in Plain English
+                  slug: javascript-in-plain-english
+                  domain: javascript.plainenglish.io
+                - id: 78073def27b8
+                  name: Python in Plain English
+                  slug: python-in-plain-english
+                  domain: python.plainenglish.io
+                - id: 35e7a49c6df5
+                  name: AWS in Plain English
+                  slug: aws-in-plain-english
+                  domain: aws.plainenglish.io
+
   /users/{username}/publications/following:
     get:
       tags:
