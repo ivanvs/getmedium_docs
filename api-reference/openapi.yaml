@@ -965,7 +965,7 @@ paths:
     get:
       tags:
         - users
-      summary: Lists
+      summary: Get User Lists
       description: |-
         Get user lists
 
@@ -991,7 +991,33 @@ paths:
           description: The token of the next page to retrieve.  This is used for pagination.  If not provided, the first page is returned.
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lists:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/UserList"
+                  nextPage:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+
+              example:
+                lists:
+                  - id: 0a856388a93a
+                    name: Natural Language Processing
+                    postsCount: 1943
+                  - id: 8d700112eb3e
+                    name: Machine Learning
+                    postsCount: 452
+                nextPage:
+                  id: '{"catalogId":{"s":"a628264b4455"},"column":{"s":"@"},"creatorId":{"s":"2eb23a991a63"},"updatedAt":{"n":"1738668539895"}}'
+
   /users/{username}/publications:
     get:
       tags:
@@ -1758,6 +1784,16 @@ components:
             type: string
         createdAt:
           type: string
+
+    UserList:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        postsCount:
+          type: integer
 
     Book:
       type: object
