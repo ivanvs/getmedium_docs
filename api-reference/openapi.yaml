@@ -865,7 +865,7 @@ paths:
     get:
       tags:
         - users
-      summary: Books
+      summary: Get User Books
       description: |-
         Get user books
 
@@ -885,7 +885,24 @@ paths:
           description: A username is a unique identifier for a user on Medium
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Book"
+
+              example:
+                - authors:
+                    - name: Jovan Cicmil
+                      id: 54995b8579ab
+                  title: "The Unstoppable Freelancer: How to master freelancing, build a sustainable career, and enjoy life"
+                  description: Get more clients, earn more money, and attain more freedom as a freelancer.
+                  url: https://jovancicmil.com/the-unstoppable-freelancer-book
+                  imageUrl: https://miro.medium.com/1*FVP1emPeFIBCCWnL_8wyiQ.jpeg
+                  publishedDate: "2021-01-01T00:00:00.000Z"
+
   /users/search:
     get:
       tags:
@@ -1716,6 +1733,29 @@ components:
           items:
             type: string
         createdAt:
+          type: string
+
+    Book:
+      type: object
+      properties:
+        authors:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              id:
+                type: string
+        title:
+          type: string
+        description:
+          type: string
+        url:
+          type: string
+        imageUrl:
+          type: string
+        publishedDate:
           type: string
 
     Error:
