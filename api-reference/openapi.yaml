@@ -1303,7 +1303,7 @@ paths:
     get:
       tags:
         - articles
-      summary: Get Article
+      summary: Get Article by ID
       description: Fetch a single Medium article using its unique identifier. This endpoint provides detailed information about the article.
       operationId: getArticle
       parameters:
@@ -1319,8 +1319,76 @@ paths:
           required: true
           description: An article ID is a unique identifier for an article on Medium
       responses:
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                timestamp: "2025-02-17T16:18:20.761Z"
+                statusCode: 400
+                error: Medium communication error
+                message: '"Cannot read properties of null (reading ''type'')"'
+                path: /articles/5d76fd056ceb
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                timestamp: "2025-02-17T16:31:22.545Z"
+                statusCode: 404
+                error: Route not found
+                message: "Route not found. Method: GET, path: /articles/5d76fd056ceb"
+                path: /articles/5d76fd056ceb
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Article"
+              example:
+                id: 5d76fd056ceb
+                slug: how-to-override-methods-in-go-5d76fd056ceb
+                title: How to override methods in Go
+                url: https://medium.com/@victoronsoftware/how-to-override-methods-in-go-5d76fd056ceb
+                subtitle: Go supports method overriding through embedded structs
+                isPublic: true
+                content:
+                  - How to override methods in Go
+                  - Originally published at https://victoronsoftware.com on January 1, 2025.
+                author:
+                  id: 89d94ffd1d5
+                  name: Victor on Software
+                  username: victoronsoftware
+                publication: null
+                topics:
+                  - programming
+                latestPublishedVersion: 23bb2fd29db3
+                responseCount: 0
+                clapCount: 1
+                voterCount: 1
+                isResponsesLocked: false
+                isSeries: false
+                sequenceInSeries: null
+                lastPublishedAt: "2025-01-08T16:29:10.918Z"
+                readingTime: 3
+                previewImageUrl: https://miro.medium.com/0*sBSZgzf3JdCkazhI.png
+                isShortForm: false
+                seoTitle: ""
+                seoDescription: ""
+                firstPublishedAt: "2025-01-01T00:00:49.248Z"
+                updatedAt: "2025-01-22T12:31:58.751Z"
+                tags:
+                  - software-development
+                  - golang
+                isSuspended: false
+                lanugage: en
+                wordCount: 562
+                isPublished: true
+
   /articles/search:
     get:
       tags:
@@ -1971,6 +2039,76 @@ components:
           type: string
         publishedDate:
           type: string
+
+    Article:
+      type: object
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+        subtitle:
+          type: string
+        isPublic:
+          type: boolean
+        content:
+          type: array
+          items:
+            type: string
+        author:
+          $ref: "#/components/schemas/Author"
+        publication:
+          type: string
+        topics:
+          type: array
+          items:
+            type: string
+        latestPublishedVersion:
+          type: string
+        responseCount:
+          type: integer
+        clapCount:
+          type: integer
+        voterCount:
+          type: integer
+        isResponsesLocked:
+          type: boolean
+        isSeries:
+          type: boolean
+        sequenceInSeries:
+          type: integer
+        lastPublishedAt:
+          type: string
+        readingTime:
+          type: integer
+        previewImageUrl:
+          type: string
+        isShortForm:
+          type: boolean
+        seoTitle:
+          type: string
+        seoDescription:
+          type: string
+        firstPublishedAt:
+          type: string
+        updatedAt:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        isSuspended:
+          type: boolean
+        lanugage:
+          type: string
+        wordCount:
+          type: integer
+        isPublished:
+          type: boolean
 
     Error:
       type: "object"
