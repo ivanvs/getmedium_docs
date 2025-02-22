@@ -1427,7 +1427,7 @@ paths:
     get:
       tags:
         - articles
-      summary: Voters
+      summary: Get Article Voters
       description: This endpoint allows you to retrieve a list of users who have voted (e.g., clapped) for a specific article on Medium. This information can be useful for analyzing audience engagement, identifying influential readers, or building community-focused features.
       operationId: voters1
       parameters:
@@ -1456,7 +1456,31 @@ paths:
           description: "The page number to fetch. Starts at 0. Default: 0."
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  voters:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Author"
+                  nextPage:
+                    $ref: "#/components/schemas/PagePaging"
+
+              example:
+                voters:
+                  - id: ec76ef99bc09
+                    name: Floriano Victor Peixoto
+                    username: florianovictor
+                  - id: 7e16f33439c
+                    name: Rodney Barreto
+                    username: rwbarreto
+                nextPage:
+                  page: 1
+                  limit: 20
+
   /articles/{article_id}/related-articles:
     get:
       tags:
