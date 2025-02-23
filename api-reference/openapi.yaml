@@ -1422,7 +1422,41 @@ paths:
           description: "The page number to fetch. Starts at 0. Default: 0."
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  articles:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/SearchArticle"
+                  nextPage:
+                    $ref: "#/components/schemas/PagePaging"
+
+              example:
+                articles:
+                  - id: 8b6155c8d878
+                    title: Secret Java Stream Hacks You’ve Never Heard Of (But Will Instantly Love) 🔥
+                    author:
+                      id: 9aa0e6248494
+                      name: Rasathurai Karan
+                      username: rasathuraikaran26
+                    slug: secret-java-stream-hacks-youve-never-heard-of-but-will-instantly-love-8b6155c8d878
+                    url: https://medium.com/javarevisited/secret-java-stream-hacks-youve-never-heard-of-but-will-instantly-love-8b6155c8d878
+                  - id: b32dbf63f712
+                    title: 10 Java Optimization Techniques That Will Make You a Java Master! 🧙‍♂️
+                    author:
+                      id: 9aa0e6248494
+                      name: Rasathurai Karan
+                      username: rasathuraikaran26
+                    slug: 10-java-optimization-techniques-that-will-make-you-a-java-master-️-b32dbf63f712
+                    url: https://medium.com/javarevisited/10-java-optimization-techniques-that-will-make-you-a-java-master-%EF%B8%8F-b32dbf63f712
+                nextPage:
+                  page: 1
+                  limit: 20
+
   /articles/{article_id}/voters:
     get:
       tags:
@@ -2133,6 +2167,18 @@ components:
           type: integer
         isPublished:
           type: boolean
+
+    SearchArticle:
+      type: "object"
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        slug:
+          type: string
+        author:
+          $ref: "#/components/schemas/Author"
 
     Error:
       type: "object"
