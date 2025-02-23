@@ -1566,7 +1566,7 @@ paths:
     get:
       tags:
         - articles
-      summary: Recommended Lists
+      summary: Get Recommended Lists for Article
       description: "This endpoint allows you to retrieve a list of **recommended reading lists** or **curated collections**  \nthat include a specific article. These lists are typically created by  \nMedium users or publications and can provide valuable insights into how  \nthe article is being categorized, shared, or recommended within the  \nMedium ecosystem. Maximum 20 lists are returned."
       operationId: recommendedLists1
       parameters:
@@ -1583,7 +1583,37 @@ paths:
           description: An article ID is a unique identifier for an article on Medium
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RecommendedList"
+
+              example:
+                - id: 8f80d5c0fafb
+                  clapCount: 383
+                  postsCount: 11
+                  title: Stories to Help You Grow as a Designer
+                  author:
+                    id: a32c340ea342
+                    username: MediumStaff
+                - id: 846bd38354b6
+                  clapCount: 199
+                  postsCount: 39
+                  title: Icon Design
+                  author:
+                    id: a81b0a6a418e
+                    username: minoraxis
+                - id: 51f7c2cb54dd
+                  clapCount: 226
+                  postsCount: 34
+                  title: Branding
+                  author:
+                    id: 921cbd614a9c
+                    username: paulrusselwyatt
+
   /articles/{article_id}/responses:
     get:
       tags:
@@ -2218,6 +2248,30 @@ components:
           type: string
         author:
           $ref: "#/components/schemas/Author"
+
+    RecommendedList:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+          clapCount:
+            type: integer
+          postsCount:
+            type: integer
+          title:
+            type: string
+          author:
+            $ref: "#/components/schemas/RecommendedListAuthor"
+
+    RecommendedListAuthor:
+      type: "object"
+      properties:
+        id:
+          type: string
+        name:
+          type: string
 
     Error:
       type: "object"
