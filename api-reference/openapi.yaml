@@ -1519,7 +1519,7 @@ paths:
     get:
       tags:
         - articles
-      summary: Related Articles
+      summary: Get Related Articles
       description: "This endpoint allows you to retrieve a list of articles that are related  \nto a specific article on Medium. These related articles are determined  \nbased on factors such as shared tags, similar content, or user  \nengagement patterns. Maximum 25 articles are returned."
       operationId: relatedArticles
       parameters:
@@ -1536,7 +1536,32 @@ paths:
           description: An article ID is a unique identifier for an article on Medium
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RelatedArticle"
+
+              example:
+                - id: cbf5eb3fff1a
+                  title: I Made 40+ Sales on Redbubble in 15 Days as a Complete Beginner!
+                  slug: how-i-made-40-sales-on-redbubble-in-15-days-cbf5eb3fff1a
+                  url: https://medium.com/write-a-catalyst/how-i-made-40-sales-on-redbubble-in-15-days-cbf5eb3fff1a
+                  author:
+                    id: 216ffa15379a
+                    name: RK's Insights ✒️
+                    username: rk.insights
+                - id: 0371f2ff2d95
+                  title: How I make $30,250 with Youtube Automation blueprint.
+                  slug: how-i-make-30-250-with-youtube-automation-blueprint-0371f2ff2d95
+                  url: https://medium.com/freeeeeeeeee/how-i-make-30-250-with-youtube-automation-blueprint-0371f2ff2d95
+                  author:
+                    id: e942e97fe57c
+                    name: Vijay ⚡️
+                    username: freeeeeeeeee
+
   /articles/{article_id}/recommended-lists:
     get:
       tags:
@@ -2176,6 +2201,20 @@ components:
         title:
           type: string
         slug:
+          type: string
+        author:
+          $ref: "#/components/schemas/Author"
+
+    RelatedArticle:
+      type: "object"
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        slug:
+          type: string
+        url:
           type: string
         author:
           $ref: "#/components/schemas/Author"
