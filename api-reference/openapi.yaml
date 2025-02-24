@@ -1618,7 +1618,7 @@ paths:
     get:
       tags:
         - articles
-      summary: Responses
+      summary: Get Article Responses
       description: "This endpoint allows you to retrieve **responses (comments)**  \nfor a specific article on Medium. The responses are paginated, and you  \ncan control the number of responses returned per request using the `limit` parameter. To manage pagination, the API uses a **unique string** (e.g., a cursor or token) that indicates the starting point for the next set of responses."
       operationId: responses1
       parameters:
@@ -1647,12 +1647,73 @@ paths:
           description: A unique string (cursor/token) that represents the starting point for the next set of responses. Omit this parameter for the first request.
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nextPage:
+                    $ref: "#/components/schemas/ToPaging"
+                  replays:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/ArticleResponse"
+
+              example:
+                nextPage:
+                  limit: 10
+                  to: 3.1736491276622:78c934f0daa3
+                replays:
+                  - id: 027f9872b225
+                    url: https://medium.com/@04bshitters/imagine-an-ai-that-can-take-on-complex-multi-step-tasks-that-are-currently-performed-by-a-human-027f9872b225
+                    author:
+                      id: 1a7c5a422267
+                      name: Gabe Domen
+                      username: 04bshitters
+                    clapCount: 219
+                    responsesCount: 2
+                    createdAt: "2024-12-28T15:02:11.155Z"
+                    firstPublishedAt: "2024-12-28T15:02:11.500Z"
+                    latestPublishedAt: "2024-12-28T15:02:11.500Z"
+                    revision: 2
+                    sequence: null
+                    isPublic: true
+                    isPublished: true
+                    publication: null
+                    inResponseTo:
+                      id: 3b8f95fd58ebe433f228cae15c4b4316
+                      url: https://medium.com/@maximilian.vogel/what-are-ai-agents-your-step-by-step-guide-to-build-your-own-df54193e2de3
+                    content: |-
+                      Imagine — an AI that can take on complex, multi-step tasks that are currently performed by a human employee or an entire department.
+                      Imagine... What are people will be doing?...and please don't answer me back "more intelligent things" or "Applying knowledge" because training won't be necessary and will NEVER be on time (time spent on AI developments). What will people who are low skilled or less resourceful do? Because you'll be amazed how many billions are doing stupid stuff BUT keep this consumer demand economy moving. Cheers. 🥂
+                  - id: fb4786be8a48
+                    url: https://medium.com/@luowuyu/i-like-this-metaphor-it-clearly-explains-the-difference-between-ai-and-ai-agent-in-one-sentence-fb4786be8a48
+                    author:
+                      id: 445e68d24051
+                      name: PeterL
+                      username: luowuyu
+                    clapCount: 61
+                    responsesCount: 1
+                    createdAt: "2024-12-31T03:57:03.868Z"
+                    firstPublishedAt: "2024-12-31T03:57:04.358Z"
+                    latestPublishedAt: "2024-12-31T03:57:04.358Z"
+                    revision: 4
+                    sequence: null
+                    isPublic: true
+                    isPublished: true
+                    publication: null
+                    inResponseTo:
+                      id: 490c4fc3afbbd808072b34e92a6da4a6
+                      url: https://medium.com/codex/what-are-ai-agents-your-step-by-step-guide-to-build-your-own-df54193e2de3#81a0--highlight-c1a209262cf7
+                      content: The Espresso Machine and the Barista
+                    content: I like this metaphor. It clearly explains the difference between AI and AI agent in one sentence.
+
   /articles/url-to-article-id:
     get:
       tags:
         - articles
-      summary: URL to Article ID
+      summary: Get Article ID for Article URL
       description: "This endpoint allows you to extract the **unique article ID**  \nfrom a Medium article URL. This is useful when you have an article URL  \nand need its corresponding ID to interact with other API endpoints that  \nrequire an `article_id`."
       operationId: urlToArticleId
       parameters:
@@ -1669,12 +1730,23 @@ paths:
           description: The full URL of the Medium article.
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  articleId:
+                    type: string
+
+              example:
+                articleId: df54193e2de3
+
   /articles/{article_id}/html:
     get:
       tags:
         - articles
-      summary: Content HTML
+      summary: Get Article Content in HTML Format
       description: "This endpoint allows you to retrieve the **publicly visible content** of a Medium article in **HTML format**.  \nThis is useful for displaying article content on your platform,  \nanalyzing the structure of the content, or integrating it into other  \napplications."
       operationId: contentHtml
       parameters:
@@ -1690,13 +1762,41 @@ paths:
           required: true
           description: An article ID is a unique identifier for an article on Medium
       responses:
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+              example:
+                timestamp: "2025-02-24T23:01:58.041Z"
+                statusCode: 404
+                error: NotFound
+                message: Article with given article ID does not exists
+                path: /29e6b016e8be/html
+
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  articleId:
+                    type: string
+                  content:
+                    type: string
+
+              example:
+                articleId: df54193e2de3
+                content: "<div><div><span>Title</span></div></div>"
+
   /articles/{article_id}/markdown:
     get:
       tags:
         - articles
-      summary: Content Markdown
+      summary: Get Article Content in Markdown Format
       description: "This endpoint allows you to retrieve the **publicly visible content** of a Medium article in **markdown format**.  \nThis is useful for displaying article content on your platform,  \nanalyzing the structure of the content, or integrating it into other  \napplications."
       operationId: contentMarkdown
       parameters:
@@ -1712,8 +1812,39 @@ paths:
           required: true
           description: An article ID is a unique identifier for an article on Medium
       responses:
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+              example:
+                timestamp: "2025-02-24T23:07:48.960Z"
+                statusCode: 404
+                error: NotFound
+                message: Article with given article ID does not exists
+                path: /29e6b016e8be/markdown
+
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  articleId:
+                    type: string
+                  content:
+                    type: string
+
+              example:
+                articleId: df54193e2de3
+                content: |+
+                  What Are AI Agents? A Short Intro And A Step-by-Step Guide to Build Your Own.
+                  =============================================================================
+
+
   /:
     get:
       summary: Get Service Information
@@ -1949,6 +2080,14 @@ components:
           type: string
         limit:
           type: integer
+    ToPaging:
+      type: object
+      properties:
+        limit:
+          type: integer
+        to:
+          type: string
+
     PagePaging:
       type: "object"
       properties:
@@ -2271,6 +2410,40 @@ components:
         id:
           type: string
         name:
+          type: string
+
+    ArticleResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+        author:
+          $ref: "#/components/schemas/Author"
+        clapCount:
+          type: integer
+        responsesCount:
+          type: integer
+        createdAt:
+          type: string
+        firstPublishedAt:
+          type: string
+        latestPublishedAt:
+          type: string
+        revision:
+          type: integer
+        sequence:
+          type: integer
+        isPublic:
+          type: boolean
+        isPublished:
+          type: boolean
+        publication:
+          type: string
+        inResponseTo:
+          type: object
+        content:
           type: string
 
     Error:
