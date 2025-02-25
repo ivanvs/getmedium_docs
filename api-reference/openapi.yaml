@@ -1891,7 +1891,7 @@ paths:
     get:
       tags:
         - lists
-      summary: Get List
+      summary: Get Lists by ID
       description: Quickly retrieve your saved lists using their unique identifiers. This endpoint simplifies accessing and managing your data.
       operationId: getList
       parameters:
@@ -1907,13 +1907,86 @@ paths:
           required: true
           description: A list ID is a unique identifier for a list on Medium
       responses:
+        "400":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+              example:
+                timestamp: "2025-02-25T23:04:58.069Z"
+                statusCode: 400
+                error: Medium communication error
+                message: '"Cannot read properties of undefined (reading ''id'')"'
+                path: /f2d429d3f0cd
+        "404":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+              example:
+                timestamp: "2025-02-25T23:17:08.483Z"
+                statusCode: 404
+                error: Route not found
+                message: "Route not found. Method: GET, path: /f2d429d3f0cd"
+                path: /f2d429d3f0cd
+
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  clapsCount:
+                    type: integer
+                  clappersCount:
+                    type: integer
+                  creator:
+                    $ref: "#/components/schemas/Author"
+                  followersCount:
+                    type: integer
+                  postsCount:
+                    type: integer
+                  responsesCount:
+                    type: integer
+                  createdAt:
+                    type: string
+                  lastInsertAt:
+                    type: string
+                  imageUrl:
+                    type: string
+
+              example:
+                id: f2d429d4f0cd
+                name: General Coding Knowledge
+                description: Algorithms & pragmatic development info
+                clapsCount: 645
+                clappersCount: 227
+                creator:
+                  id: 6e6aef58c183
+                  name: Eduardo
+                  username: eddiebarth
+                followersCount: 1928
+                postsCount: 20
+                responsesCount: 4
+                createdAt: "2021-06-25T17:16:35.036Z"
+                lastInsertAt: "2023-01-10T19:31:29.103Z"
+                imageUrl: https://miro.medium.com/0*9e7afed3edd353939a258e072824c99792ead9c7.jpeg
   /lists/{list_id}/responses:
     get:
       tags:
         - lists
-      summary: Responses
+      summary: Get Lists Responses
       description: Get user responses for list. Gain insights into how users are interacting with list. This endpoint provides valuable data on user responses, allowing you to analyze engagement and improve list performance.
       operationId: responses
       parameters:
@@ -1942,12 +2015,71 @@ paths:
           description: A unique string (cursor/token) that represents the starting point for the next set of responses. Omit this parameter for the first request.
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  listId:
+                    type: string
+                  responseCount:
+                    type: integer
+                  responses:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        url:
+                          type: string
+                        clapCount:
+                          type: integer
+                        responsesCount:
+                          type: integer
+                        voterCount:
+                          type: integer
+                        title:
+                          type: string
+                        author:
+                          $ref: "#/components/schemas/Author"
+                  nextPage:
+                    $ref: "#/components/schemas/ToPaging"
+
+              example:
+                listId: f2d429d4f0cd
+                responseCount: 4
+                responses:
+                  - id: b34caef4f736
+                    url: https://medium.com/@ngundengdiewmachar/thank-b34caef4f736
+                    clapCount: 3
+                    responsesCount: 0
+                    voterCount: 3
+                    title: Thank
+                    author:
+                      id: 51d080b421d5
+                      name: Diew Machar Ngundeng
+                      username: ngundengdiewmachar
+                  - id: 082f9b3dbd33
+                    url: https://medium.com/@nilimapradhan061/i-am-content-writer-so-coding-allows-me-to-customize-my-website-by-adding-unique-features-082f9b3dbd33
+                    clapCount: 2
+                    responsesCount: 0
+                    voterCount: 2
+                    title: I am content writer so Coding allows me to customize my website by adding unique features…
+                    author:
+                      id: ff348785ac49
+                      name: Nilimapradhan
+                      username: nilimapradhan061
+                nextPage:
+                  limit: 2
+                  to: 2.1729749343631:082f9b3dbd33
+
   /lists/{list_id}/voters:
     get:
       tags:
         - lists
-      summary: Voters
+      summary: Get List Voters
       description: "Get voters for list: Identify Engaged Users. Discover which users have shown their support for a list. This endpoint provides valuable data for understanding user engagement and identifying key contributors."
       operationId: voters
       parameters:
@@ -1970,7 +2102,33 @@ paths:
           description: The token of the next page to retrieve.  This is used for pagination.  If not provided, the first page is returned.
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  voters:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Author"
+                  nextPage:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+
+              example:
+                voters:
+                  - id: 79f0934255da
+                    name: Prakash Sukanya
+                    username: prakash.sukanya15
+                  - id: e1c2af556186
+                    name: Christopher Hüneke | ChriSEO
+                    username: chriseo
+                nextPage:
+                  id: '{"catalogId":{"s":"f2d429d4f0cd"},"column":{"s":"f2d429d4f0cd"},"firstClapAt":{"n":"1736715527041"},"userId":{"s":"fe764e984560"}}'
+
   /lists/search:
     get:
       tags:
@@ -2004,7 +2162,41 @@ paths:
           description: "The page number to fetch. Starts at 0. Default: 0."
       responses:
         "200":
-          description: ""
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lists:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/List"
+                  nextPage:
+                    $ref: "#/components/schemas/PagePaging"
+
+              example:
+                lists:
+                  - id: 7c826120755b
+                    title: Java
+                    clapCount: 0
+                    postsCount: 1
+                    author:
+                      id: 8dcf28a9dbca
+                      name: charles tognol
+                      username: tognol.charles
+                  - id: 410d1ffb55c0
+                    title: java
+                    clapCount: 0
+                    postsCount: 21
+                    author:
+                      id: 9b8e4cbc4bcd
+                      name: Endre Gabriel
+                      username: endre.gabriel
+                nextPage:
+                  page: 2
+                  limit: 20
+
 components:
   schemas:
     FullTag:
@@ -2445,6 +2637,20 @@ components:
           type: object
         content:
           type: string
+
+    List:
+      type: object
+      properties:
+        id:
+          type: string
+        clapCount:
+          type: integer
+        postsCount:
+          type: integer
+        title:
+          type: string
+        author:
+          $ref: "#/components/schemas/Author"
 
     Error:
       type: "object"
